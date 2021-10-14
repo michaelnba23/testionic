@@ -1,0 +1,17 @@
+<ion-item *ngIf="resto" [routerLink]="'/resto/' + resto.id" [detail]="false">
+  <ion-label class="ion-text-wrap">
+    <h2>
+      {{ resto.name }}
+      <span class="date">
+        <ion-note>{{ resto.address }}</ion-note>
+        <ion-icon
+          name="chevron-forward"
+          size="small"
+          *ngIf="isIos()"
+        ></ion-icon>
+      </span>
+    </h2>
+    <h3>{{ resto.type }}</h3>
+    <p></p>
+  </ion-label>
+</ion-item>

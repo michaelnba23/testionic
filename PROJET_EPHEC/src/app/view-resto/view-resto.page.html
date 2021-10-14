@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button
+        [text]="getBackButtonText()"
+        defaultHref="/"
+      ></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" *ngIf="resto">
+  <ion-item>
+    <ion-icon name="person-circle" color="primary"></ion-icon>
+    <ion-label class="ion-text-wrap">
+      <h2>
+        {{ resto.name }}
+        <span class="date">
+          <ion-note>{{ resto.type }}</ion-note>
+        </span>
+      </h2>
+    </ion-label>
+  </ion-item>
+
+  <div class="ion-padding">
+    <h1>{{ resto.address }}</h1>
+    <p>Carte avec l'emplacement du resto ici</p>
+  </div>
+</ion-content>
