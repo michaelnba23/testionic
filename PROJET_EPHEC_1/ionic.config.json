@@ -1,0 +1,7 @@
+{
+  "name": "hungram",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
