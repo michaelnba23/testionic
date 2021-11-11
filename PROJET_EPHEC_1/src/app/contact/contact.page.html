@@ -8,18 +8,8 @@
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="essaieForm" (ngSubmit)="addSong()" novalidate>
+  <form [formGroup]="essaieForm" (ngSubmit)="loginUser(essaieForm.value)" novalidate>
 
-    <ion-item lines="full">
-      <ion-label position="floating">Name</ion-label>
-      <ion-input formControlName="name" type="text" required></ion-input>
-    </ion-item>
-    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.name.errors?.required">
-      le nom est obligatoire.
-    </span>
-    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.name.errors?.minlength">
-      Le nom doit contenir minimum 2 caracteres.
-    </span>
   
     <ion-item lines="full">
       <ion-label position="floating">Email</ion-label>
@@ -35,19 +25,15 @@
   
   
   
-    <ion-item lines="full">
-      <ion-label position="floating">Mobile</ion-label>
-      <ion-input formControlName="mobile" type="text" required></ion-input>
+    <ion-item>
+      <ion-label position="floating">Mot de passe</ion-label>
+      <ion-input formControlName="password" type="password" placeholder="Mot de passe"></ion-input>
     </ion-item>
-
-    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.mobile.errors?.required">
-      Le numéro est obligatoire.
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.password.errors?.required">
+      Le mot de passe est obligatoire.
     </span>
-    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.mobile.errors?.pattern">
-      Seuls les chiffres sont autorisés.
-    </span>
-    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.mobile.errors?.minlength">
-      Le numéro doit comporter 10 chiffres.
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.password.errors?.pattern">
+      Le mot de passe doit etre valide.
     </span>
   
     <ion-row>

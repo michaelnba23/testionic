@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { AngularFirestore } from "@angular/fire/firestore";
 import { DataService} from "../services/data.service";
+import { AuthService } from '../services/auth.service';
+import { NavController } from '@ionic/angular';
+
 
 
 
@@ -19,10 +22,16 @@ export class ContactPage implements OnInit {
       mobile: string = "" ;
   defaultDate = '1987-06-30';
   isSubmitted = false;
+  errorMessage: string = '';
+
   
 
 
-  constructor(private firestore: AngularFirestore, public formBuilder: FormBuilder, private data: DataService) {
+  constructor(private firestore: AngularFirestore,
+     public formBuilder: FormBuilder, private data: DataService, 
+     private authService: AuthService,
+     private navCtrl: NavController,
+    ) {
     
 }
 addSong(){
@@ -41,13 +50,25 @@ public submitForm() {
     console.log(this.essaieForm.value)
   }
 }
+loginUser(value) {
+  this.authService.loginUser(value)
+    .then(res => {
+      console.log(res);
+      this.errorMessage = "";
+      this.navCtrl.navigateForward('/locataire');
+    }, err => {
+      this.errorMessage = err.message;
+    })
+}
 
   ngOnInit() {
     this.essaieForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
       prenom: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
-      mobile: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.minLength(10)]]
+      mobile: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.minLength(10)]],
+      password: ['', [Validators.required, Validators.minLength(5)]]
+
     })
   }
 
