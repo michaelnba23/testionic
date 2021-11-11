@@ -23,6 +23,7 @@ export class ContactPage implements OnInit {
   defaultDate = '1987-06-30';
   isSubmitted = false;
   errorMessage: string = '';
+  successMessage: string = '';
 
   
 
@@ -58,6 +59,20 @@ loginUser(value) {
       this.navCtrl.navigateForward('/locataire');
     }, err => {
       this.errorMessage = err.message;
+    })
+}
+
+tryRegister(value) {
+  this.authService.registerUser(value)
+    .then(res => {
+      console.log(res);
+      this.errorMessage = "";
+      this.successMessage = "Your account has been created. Please log in.";
+      this.navCtrl.navigateForward('/locataire');
+    }, err => {
+      console.log(err);
+      this.errorMessage = err.message;
+      this.successMessage = "";
     })
 }
 

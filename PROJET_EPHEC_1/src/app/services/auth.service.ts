@@ -17,6 +17,17 @@ export class AuthService {
           err => reject(err))
     })
   }
-}
+  
+  registerUser(value) {
+    return new Promise<any>((resolve, reject) => {
+
+      this.afAuth.createUserWithEmailAndPassword(value.email, value.password)
+        .then(
+          res => resolve(res),
+          err => reject(err))
+    })
+
+  }
+} // fermeture export
 
 
