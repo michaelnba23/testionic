@@ -42,7 +42,7 @@
       </ion-col>
     </ion-row>
   </form>
-  <form [formGroup]="essaieForm" (ngSubmit)="tryRegister(essaieForm.value)" novalidate>
+  <form [formGroup]="essaieForm" (ngSubmit)="onVeut(essaieForm.value)" novalidate>
 
   
     <ion-item lines="full">
@@ -79,4 +79,5 @@
     <label class="success-message">{{successMessage}}</label>
   </form>
   
+
 </ion-content>

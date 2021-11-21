@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { DataService } from '../services/data.service';
+import { AuthService } from '../services/auth.service';
+
 
 @Component({
   selector: 'app-locataire',
@@ -13,8 +15,16 @@ export class LocatairePage implements OnInit {
     defaultDate = '1987-06-30';
     isSubmitted = false;
 
-  constructor(public formBuilder: FormBuilder, private data: DataService) { }
+  constructor(public formBuilder: FormBuilder, private data: DataService, private authService: AuthService,
+    ) { }
 
+
+    pipi(){
+      this.authService.push;
+   }
+   caca(){
+     return console.log('please');
+   }
   addData(){
     this.isSubmitted = true;
     if (!this.essaieForm.valid) {

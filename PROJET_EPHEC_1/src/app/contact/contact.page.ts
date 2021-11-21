@@ -4,6 +4,11 @@ import { AngularFirestore } from "@angular/fire/firestore";
 import { DataService} from "../services/data.service";
 import { AuthService } from '../services/auth.service';
 import { NavController } from '@ionic/angular';
+import { userInfo } from 'os';
+
+import { AngularFireAuth } from '@angular/fire/auth';
+import * as firebase from 'firebase';
+
 
 
 
@@ -20,10 +25,12 @@ export class ContactPage implements OnInit {
   name: string = "";
       email: string = "";
       mobile: string = "" ;
+      password: string = "";
   defaultDate = '1987-06-30';
   isSubmitted = false;
   errorMessage: string = '';
   successMessage: string = '';
+  test1: number = 50;
 
   
 
@@ -31,10 +38,15 @@ export class ContactPage implements OnInit {
   constructor(private firestore: AngularFirestore,
      public formBuilder: FormBuilder, private data: DataService, 
      private authService: AuthService,
-     private navCtrl: NavController,
+     private navCtrl: NavController,private afAuth: AngularFireAuth,
+     
     ) {
     
 }
+pipi(){
+   this.authService.push;
+}
+
 addSong(){
   this.data.saveSong(this.essaieForm.value.email,this.essaieForm.value.name,this.essaieForm.value.mobile, );
 }
@@ -57,11 +69,19 @@ loginUser(value) {
       console.log(res);
       this.errorMessage = "";
       this.navCtrl.navigateForward('/locataire');
+      
     }, err => {
       this.errorMessage = err.message;
     })
 }
-
+onVeut(value){
+  var user = this.afAuth.createUserWithEmailAndPassword(value.email, value.password).then(cred => {
+    return this.firestore.collection('users').doc(cred.user.uid).set({ 
+      value
+      })
+    })
+    return { user }
+}
 tryRegister(value) {
   this.authService.registerUser(value)
     .then(res => {

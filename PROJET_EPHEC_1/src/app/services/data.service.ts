@@ -32,6 +32,7 @@ export class DataService {
   }
 
 
+
   
   public getRestoByKey(key) {
     return this.firestore
@@ -40,12 +41,13 @@ export class DataService {
       .valueChanges({ idField: "id" });
   }
 
+
   saveSong(email, name, mobile) {
     return this.firestore.collection('test')
       .add({ email, name, mobile });
   }
   saveData(email, name, prenom) {
-    return this.firestore.collection('testo')
+    return this.firestore.collection('users')
       .add({ email, name, prenom });
   }
   
