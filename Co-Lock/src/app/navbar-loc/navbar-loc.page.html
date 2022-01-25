@@ -1,0 +1,19 @@
+<ion-tabs *ngFor="let user of users | async">
+  <ion-tab-bar slot="bottom">
+
+    <ion-tab-button tab="bienloc">
+      <ion-icon name="home-outline"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="requetes">
+      <ion-icon name="notifications-outline" id="cart-btn"></ion-icon>
+      <ion-badge *ngIf="user.code">{{compteur}}</ion-badge>
+
+    </ion-tab-button>
+
+    <ion-tab-button tab="profil-l">
+      <ion-icon name="person-outline"></ion-icon>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+

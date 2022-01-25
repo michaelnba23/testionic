@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> Profil </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngFor="let user of users | async">
+  <div class="header">
+    <h2 class="nomPropriétaire"> {{user.prenom}} {{user.name}}</h2>
+     <div class="space-between">
+       <div class="compteurbiens">
+         <ion-badge color="light" mode="ios"> {{compteur}}</ion-badge>
+        <p>biens</p>
+       </div>
+
+
+
+     </div>
+
+  </div>
+  <div class="flex">
+  <div class="bordureVerte">
+  <div class="bordureBlanche">
+  <div class="photoProfil">
+    <img [src]="user.photo">
+  </div>
+</div>
+</div>
+</div>
+
+<ion-card>
+  <ion-card-header> Mon compte </ion-card-header>
+  <ion-item> {{ user.name }} </ion-item>
+  <ion-item> {{ user.prenom }} </ion-item>
+  <ion-item> {{ user.email }} </ion-item>
+  <ion-item> {{ user.mobile }} </ion-item>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button class="update_btn" routerLink='/profilinfo'> Modifier </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-card>
+
+<ion-button class="secondary_btn" expand="block" fill="outline" (click)='confirmSignOut()'>Se déconnecter</ion-button>
+
+<ion-button class="primary_btn" expand="block" fill="block" (click)='handleButtonClick()'>Supprimer le compte</ion-button>
+
+</ion-content>
+
+
+
+

@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mes Biens</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-button class="secondary_btn" expand="block" fill="outline" routerLink="/ajoutbien">Ajouter un bien</ion-button>
+
+  <ion-card *ngFor="let bien of biens | async" [routerLink]="'../../monbien/' + bien.id">
+    <img [src]="bien.image" alt="image du bien">
+    <div>
+      <ion-card-title class="title"> {{ bien.name }}</ion-card-title>
+      <br>
+      <ion-text class="content"> {{bien.rue}} {{bien.numero}}, {{bien.codepostal}} {{bien.ville}}, {{bien.province}}</ion-text>
+      <br>
+      <ion-text class="content"> {{bien.prix}}€/mois</ion-text>
+    </div>
+  </ion-card>
+
+  <div class="center">
+    <ion-button class="arch_btn" expand="block" fill="outline" routerLink="/biensarchive">Voir les archives</ion-button>
+  </div>
+
+</ion-content>

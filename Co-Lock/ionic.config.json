@@ -1,0 +1,10 @@
+{
+  "name": "ConnectionFirebase",
+  "integrations": {
+    "capacitor": {
+      "enabled": false
+    },
+    "cordova": {}
+  },
+  "type": "angular"
+}

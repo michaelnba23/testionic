@@ -62,8 +62,16 @@
   <ion-button color= "vert" [routerLink]="['/formuleproprio']" expand="block" >Inscription</ion-button>
   
   </form>
-  <ion-button color= "vert" expand="block" (click)="pipi()" type="submit" >test</ion-button> 
+  <ion-button color= "vert" expand="block" (click)="piliP()" type="submit" >pilipili</ion-button> 
 
   </ion-card>
+  <ion-card *ngFor="let truc of users" color="primary"><!-- boucle dans tt les trucs de users et les affiches nice -->
+    <ion-card-header>
+      <ion-card-title>{{truc.name}} of {{truc.age}} years</ion-card-title>
+      <ion-card-subtitle>From: {{truc.address}}</ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-button color= "vert" expand="block" type="submit" >rien pur now</ion-button> <!--le expand block permet d'avoir un bouton qui prend toute la largeur-->
 
 </ion-content>

@@ -42,7 +42,7 @@
       </ion-col>
     </ion-row>
   </form>
-  <form [formGroup]="essaieForm" (ngSubmit)="onVeut(essaieForm.value)" novalidate>
+  <form [formGroup]="essaieForm" (ngSubmit)="addMike()" novalidate>
 
   
     <ion-item lines="full">
@@ -56,6 +56,10 @@
     <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.pattern">
       L'email doit etre valide.
     </span>
+    <ion-item lines="full">
+      <ion-label position="floating">nom</ion-label>
+      <ion-input formControlName="name" type="text" required></ion-input>
+    </ion-item>
   
   
   
@@ -78,6 +82,17 @@
     <label class="error-message">{{errorMessage}}</label>
     <label class="success-message">{{successMessage}}</label>
   </form>
-  
+  <ion-button type="submit" color="danger" (click)="onPrend()" expand="block">On prend</ion-button>
+  <ion-card *ngFor="let item of test" color="primary">
+      <ion-card-header>
+        <ion-card-title>{{item.name}} of {{item.age}} years</ion-card-title>
+        <ion-card-subtitle>From: {{item.address}}</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+
+
+    <ion-button color= "vert" expand="block" (click)="signOut()"type="submit" >sign out </ion-button>
+    <ion-button color= "vert" expand="block" (click)="jspTrop()"type="submit" >jsp pas trop </ion-button> <!--le expand block permet d'avoir un bouton qui prend toute la largeur-->
+    <!--le expand block permet d'avoir un bouton qui prend toute la largeur-->
 
 </ion-content>

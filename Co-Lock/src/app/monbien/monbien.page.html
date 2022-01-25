@@ -1,0 +1,176 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mon bien</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button text="Retour">
+
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" *ngIf="bien">
+
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Mon bien </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <br>
+
+
+  <ion-card>
+    <img [src]="bien.image"/>
+    <ion-card-header>
+      <ion-card-title>{{bien.name}}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-subtitle>Description du bien</ion-card-subtitle>
+    <ion-card-content> {{bien.description}} </ion-card-content>
+
+    <ion-card-subtitle>Localisation</ion-card-subtitle>
+    <ion-card-content> {{bien.rue}} {{bien.numero}}, {{bien.cp}} {{bien.ville}}, {{bien.province}}</ion-card-content>
+
+    <ion-card-subtitle>Autres informations</ion-card-subtitle>
+    <ion-card-content> Nombre de lit(s) : {{bien.nbrePlace}} <br>Loyer : {{bien.prix}}€/mois <br> Superficie : {{bien.superficie}} m2 </ion-card-content>
+    <ion-button class="secondary_btn" expand="block" fill="outline" [routerLink]="'../../update-biens/' + bien.id ">Modifier votre bien</ion-button>
+
+
+
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title> Requêtes & Reminder</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-subtitle> Requêtes </ion-card-subtitle>
+    <ion-card-content> Cette fonctionnalité vous permet de voir les différentes requêtes faites par vos locataires. </ion-card-content>
+
+    <ion-list *ngFor="let r of newReqs | async" [routerLink]="'../../requeteinfo/' + r.id" >
+      <ion-item [class]="r.etat" >
+        <ion-label>
+          <h2>{{r.nom}} </h2>
+          <p> {{r.description}} </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngFor="let r of inprogressReqs | async" [routerLink]="'../../requeteinfo/' + r.id" >
+      <ion-item [class]="r.etat" >
+        <ion-label>
+          <h2>{{r.nom}} </h2>
+          <p> {{r.description}} </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngFor="let r of finishReqs | async" [routerLink]="'../../requeteinfo/' + r.id" >
+      <ion-item [class]="r.etat" >
+        <ion-label>
+          <h2>{{r.nom}} </h2>
+          <p> {{r.description}} </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <div class="trait_dessus"><hr></div>
+
+    <ion-card-subtitle> Reminder </ion-card-subtitle>
+    <ion-card-content> Cette fonctionnalité vous permet d'ajouter des tâches à réaliser pour votre bien. Un reminder n'est pas visible par vos locataires. </ion-card-content>
+
+    <ion-list *ngFor="let r of newRem | async" [routerLink]="'../../requeteinfo/' + r.id" >
+      <ion-item [class]="r.etat" >
+        <ion-label>
+          <h2>{{r.nom}} </h2>
+          <p> {{r.description}} </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngFor="let r of inprogressRem | async" [routerLink]="'../../requeteinfo/' + r.id" >
+      <ion-item [class]="r.etat" >
+        <ion-label>
+          <h2>{{r.nom}} </h2>
+          <p> {{r.description}} </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngFor="let r of finishRem | async" [routerLink]="'../../requeteinfo/' + r.id" >
+      <ion-item [class]="r.etat" >
+        <ion-label>
+          <h2>{{r.nom}} </h2>
+          <p> {{r.description}} </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+
+    <ion-button class="secondary_btn" expand="block" fill="outline" routerLink="/requetes" >Ajouter une requête / un reminder</ion-button>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title> Documents relatifs au bien </ion-card-title>
+      <ion-card-subtitle> Toutes les infos à savoir concernant votre bien </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      Cette fonctionnalité vous permet d'ajouter tous les documents utiles pour vos locataires.
+    </ion-card-content>
+
+    <ion-card *ngFor="let doc of docs | async" [routerLink]="'../../docinfo/' + doc.id" >
+      <img [src]= 'doc.url' class="docpres">
+      <ion-card-header>
+        <ion-card-title> {{ doc.name }} </ion-card-title>
+        <ion-card-subtitle> {{ doc.description }} </ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-button class="secondary_btn" expand="block" fill="outline" routerLink="/docbiens">Ajouter un document</ion-button>
+
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title> Gestion de vos locataires </ion-card-title>
+      <ion-card-subtitle> {{ bien.code }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      Grâce au code lié à votre bien, vous pouvez inviter vos locataires à rejoindre votre bien.
+    </ion-card-content>
+
+    <ion-button class="secondary_btn" expand="block" fill="outline" (click)="share()">Partager le code</ion-button>
+
+    <ion-card-subtitle> Locataire(s) déjà enregistré </ion-card-subtitle>
+    <ion-card-content>
+      Vous trouverez ci-dessous tous les locataires liés à votre bien.
+      Ils ont accès à toutes les informations utiles liées à votre bien : informations, documents, requêtes...
+    </ion-card-content>
+
+    <ion-list>
+      <ion-item *ngFor="let l of loc | async" [routerLink]="'../../infoloc/' + l.id" class="loc">
+        <ion-label >
+          <h2>{{l.name}} {{l.prenom}} </h2>
+          <p> {{l.mobile}} </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title> Calculez votre indexation</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Cette fonctionnalité vous permet de calculer l'indexation de votre loyer.
+    </ion-card-content>
+    <ion-button class="secondary_btn" expand="block" fill="outline" [routerLink]="'../../indexation/' + bien.id">Calculer l'indexation</ion-button>
+  </ion-card>
+
+
+  <ion-button class="primary_btn" expand="block" fill="solid" (click)='confirmArchive()'>Archiver ce bien</ion-button>
+
+
+</ion-content>

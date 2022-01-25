@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>A propos de la requête</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button text="Retour">
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="req">
+
+  <ion-card>
+
+    <ion-card-header> {{req.nom}} </ion-card-header>
+    <ion-card-content *ngIf="req.url">
+       <img [src]="req.url"/>
+    </ion-card-content>
+    <ion-card-subtitle> Description de la requête </ion-card-subtitle>
+    <ion-card-content> {{req.description}} </ion-card-content>
+
+    <div class="trait_dessus"><hr></div>
+
+    <ion-card-subtitle> Informations à propos de la requête</ion-card-subtitle>
+      <ion-card-content> Statut : {{req.etat}} </ion-card-content>
+      <ion-card-content> Emise par {{req.authorName}} le {{req.crea.toDate()}}</ion-card-content>
+      <ion-card-content> Propriétaire du bien : {{req.nameProprio}} </ion-card-content>
+      <ion-card-content> Nom du bien : {{req.bienName}} </ion-card-content>
+      <ion-card-content *ngIf="req.inprogress"> Debut du traitement : {{req.inprogress.toDate()}} </ion-card-content>
+      <ion-card-content *ngIf="req.finish"> Fin du traitement : {{req.finish.toDate()}} </ion-card-content>
+
+      <div class="trait_dessus" *ngIf="!req.finish"><hr></div>
+
+    <ion-card-subtitle *ngIf="!req.finish"> Modifier le statut de la requête</ion-card-subtitle>
+      <p class="statut">
+        <ion-chip (click)="statutNew()" color="success" *ngIf="!req.crea">
+          <ion-label>Nouveau</ion-label>
+        </ion-chip>
+
+        <ion-chip (click)="confirmInprogress()" color="warning" *ngIf="!req.inprogress">
+          <ion-label>En cours</ion-label>
+        </ion-chip>
+
+        <ion-chip (click)="confirmFinish()" color="danger" *ngIf="!req.finish">
+          <ion-label>Terminé</ion-label>
+        </ion-chip>
+      </p>
+
+    <ion-button class="primary_btn" fill="block" *ngIf="req.auteur === currentUser" (click)="confirmDelete()"> Supprimer cette requête</ion-button>
+
+
+  </ion-card>
+
+</ion-content>
